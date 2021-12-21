@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:Prominence.ViewModel"
+             xmlns:converter="clr-namespace:Prominence.Converters"
+             x:Class="Prominence.View.MenuView"
+             >
+    <ContentPage.BindingContext>
+        <local:MenuViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:AchievementToStringConverter  x:Key="AchievementToStringConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+  <ContentPage.Content>
+<RelativeLayout>
+    <Image Source="{Binding Background}"
+        RelativeLayout.WidthConstraint=
+        "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+        RelativeLayout.HeightConstraint=
+        "{ConstraintExpression Type=RelativeToParent, Property=Height}"/>
+    <Grid x:Name="ContextGrid" IsVisible="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="11*"/>
+            <RowDefinition Height="14*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.05*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.05*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="55">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ImageButton x:Name="MenuButton"
+                    Grid.Column="0"
+                    BackgroundColor="Transparent"
+                    Source="{Binding MenuButtonImage}"
+                    Command="{Binding CloseMenuCmd}"/>
+        </Grid>
+            
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="55">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Column="1">
+                    <Label TextColor="White" FontSize="Medium">Achievements:</Label>
+                    <CollectionView Grid.Row="1" Grid.Column="1" 
+                        x:Name="AchievementsCollection"
+                        ItemsSource="{Binding Achievements}" 
+                        BackgroundColor="Transparent" 
+                        VerticalOptions="End" 
+                        VerticalScrollBarVisibility="Always"
+                        ItemsUpdatingScrollMode="KeepLastItemInView">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <Label
+                                        Text="{Binding ., Converter={StaticResource AchievementToStringConverter}}" 
+                                        FontSize="Small" 
+                                        HorizontalTextAlignment="Start" 
+                                        TextColor="White" 
+                                        BackgroundColor="Transparent"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="55">
+            <Button BackgroundColor="Transparent" Command="{Binding TeleporterCmd}"/>
+        </Grid>
+    </Grid>
+    </RelativeLayout>
+    </ContentPage.Content>
+</ContentPage>

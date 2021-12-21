@@ -1,0 +1,15 @@
+Core/bin/
+Core/obj/
+LostInSpace.Android/bin/
+LostInSpace.Android/obj/
+LostInSpace.iOS/bin/
+LostInSpace.iOS/obj/
+LostInSpace/bin/
+LostInSpace/obj/
+Sequoia/bin/
+Sequoia/obj/
+Utilities/bin/
+Utilities/obj/
+packages/
+.vs/*
+*.csproj.user

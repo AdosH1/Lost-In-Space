@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:Prominence.ViewModel"
+             xmlns:controls="clr-namespace:Prominence.View.Controls"
+             mc:Ignorable="d"
+             x:Class="Prominence.View.DialogueView"
+             >
+    <ContentPage.BindingContext>
+        <local:DialogueViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+    <RelativeLayout BackgroundColor="Transparent" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <Image Source="{Binding Background}"
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}"
+            RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}"
+            Aspect="Fill"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="9*"/>
+            </Grid.RowDefinitions>
+            <Grid x:Name="DialogueGrid" IsVisible="True" Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="18.5*"/>
+                    <RowDefinition Height="0.3*"/>
+                    <RowDefinition Height="10.7*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.05*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.05*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <ImageButton x:Name="MenuButton"
+                            Grid.Column="0"
+                            BackgroundColor="Transparent"
+                            Source="{Binding MenuButtonIcon}"
+                            Command="{Binding MenuCmd}"/>
+                    <Label Grid.Column="2" 
+                           TextColor="White" 
+                           FontSize="Medium"
+                           HorizontalTextAlignment="End">Energy</Label>
+                    <Grid Grid.Row="0" Grid.Column="3" Padding="0,5,5,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" IsVisible="{Binding ShowEnergyIcon3}" Source="{Binding EnergyIcon}"/>
+                        <Image Grid.Column="1" IsVisible="{Binding ShowEnergyIcon2}" Source="{Binding EnergyIcon}"/>
+                        <Image Grid.Column="2" IsVisible="{Binding ShowEnergyIcon1}" Source="{Binding EnergyIcon}"/>
+                    </Grid>
+                </Grid>
+                <CollectionView Grid.Row="1" Grid.Column="1" 
+                        x:Name="LogCollection"
+                        ItemsSource="{Binding Log}" 
+                        BackgroundColor="Transparent" 
+                        VerticalOptions="End" 
+                        VerticalScrollBarVisibility="Always"
+                        ItemsUpdatingScrollMode="KeepLastItemInView">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label
+                                    Margin="5"
+                                    Text="{Binding Text}" 
+                                    FontSize="Medium" 
+                                    HorizontalTextAlignment="{Binding HorizontalTextAlignment}" 
+                                    TextColor="{Binding TextColor}" 
+                                    BackgroundColor="Transparent"
+                                    />
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <CollectionView Grid.Row="3" Grid.Column="1" VerticalOptions="FillAndExpand"
+                        ItemsSource="{Binding Buttons}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout VerticalOptions="FillAndExpand">
+                                <Button 
+                                    Text="{Binding Text}" 
+                                    Command="{Binding Command}" 
+                                    FontSize="Small" 
+                                    HorizontalOptions="Center" 
+                                    TextColor="Black" 
+                                    WidthRequest="350"
+                                    HeightRequest="38"
+                                    BackgroundColor="Silver"
+                                    Margin="0,5,0,5"
+                                    />
+                                </StackLayout>
+                            </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+            <Grid x:Name="AchievementTab" Grid.Row="0" BackgroundColor="DarkGoldenrod" Padding="5" >
+                <Grid Grid.Row="0" BackgroundColor="Goldenrod" Padding="5" >
+                    <Grid Grid.Row="0" BackgroundColor="Gold" Padding="5" >
+                        <Label BackgroundColor="LightGray"
+                                HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black" FontSize="Small"
+                                Text="{Binding AchievementText}"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+
+    </RelativeLayout>
+    </ContentPage.Content>
+</ContentPage>
