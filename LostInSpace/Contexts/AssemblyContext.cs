@@ -35,6 +35,17 @@ namespace Prominence.Contexts
             return null;
         }
 
+        public static System.IO.Stream GetStreamByName(string fileName)
+        {
+            var obj = ResourceManager.GetObject(fileName);
+            if (obj != null)
+            {
+                var bytes = (byte[])obj;
+                MemoryStream stream = new MemoryStream(bytes);
+                return stream;
+            }
+            return null;
+        }
 
     }
 }

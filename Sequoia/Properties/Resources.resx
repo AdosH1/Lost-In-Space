@@ -190,4 +190,7 @@
   <data name="Sequoia.TJunction" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tjunction.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+<!--  <data name="Sequoia.Andrea" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\andrea_bg.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>-->
 </root>

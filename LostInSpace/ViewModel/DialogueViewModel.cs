@@ -18,6 +18,7 @@ using Sequoia;
 using Core.Models;
 using Xamarin.Essentials;
 using Prominence.Model.Interfaces;
+using MediaManager;
 
 namespace Prominence.ViewModel
 {
@@ -151,8 +152,18 @@ namespace Prominence.ViewModel
                 await Application.Current.MainPage.Navigation.PushModalAsync(MenuView);
             });
 
+            Test();
             var destinationFrame = GameController.Traverse(GameController.Player.Location);
             LoadFrame(destinationFrame);
+        }
+
+        private async void Test()
+        {
+            //var mp = CrossMediaManager.Current;
+            //await mp.PlayFromAssembly("andrea_bg.mp3", AssemblyContext.Assembly);
+            //var andrea = Constants.Andrea;
+            var andrea = "Sequoia.Andrea";//"andrea_bg.mp3";
+            await CrossMediaManager.Current.Play(AssemblyContext.GetStreamByName(andrea), "andrea_bg.mp3");
         }
 
         public void ClearScreen(bool clearAll = false)

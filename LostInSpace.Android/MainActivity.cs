@@ -8,6 +8,7 @@ using Android.Widget;
 using Android.OS;
 using Prominence.Model.Constants;
 using Android;
+using MediaManager;
 
 namespace Prominence.Droid
 {
@@ -29,6 +30,8 @@ namespace Prominence.Droid
             // Remove status bar
             Window.AddFlags(WindowManagerFlags.Fullscreen);
             Window.ClearFlags(WindowManagerFlags.ForceNotFullscreen);
+
+            CrossMediaManager.Current.Init(this);
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {

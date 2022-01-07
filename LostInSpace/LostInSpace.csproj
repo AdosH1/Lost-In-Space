@@ -14,6 +14,7 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
     <PackageReference Include="NETStandard.Library" Version="2.0.3" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2291" />
+    <PackageReference Include="Plugin.MediaManager" Version="1.0.9" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utilities\Utilities.csproj" />
@@ -23,5 +24,6 @@
   <ItemGroup>
     <None Remove="NETStandard.Library" />
     <None Remove="Xamarin.Forms" />
+    <None Remove="Plugin.MediaManager" />
   </ItemGroup>
 </Project>
