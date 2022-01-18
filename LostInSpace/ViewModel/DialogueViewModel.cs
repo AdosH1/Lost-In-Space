@@ -27,6 +27,7 @@ namespace Prominence.ViewModel
         public double Height { get; set; }
         public double Width { get; set; }
         public MenuView MenuView { get; set; }
+        public CollectionView LogCollection { get; set; }
         public ObservableCollection<DialogueLabel> Log { get; set; }
         public ObservableCollection<Button> Buttons { get; set; }
         private string CurrentBackgroundImage { get; set; }
@@ -135,7 +136,6 @@ namespace Prominence.ViewModel
 
             var showInterstitalAd = new Action(async () => { await DependencyService.Get<IInterstitialAd>().Display(AdConstants.DebugInterstitialId).ConfigureAwait(true); });
             GameController.CurrentFilm = Sequoia.Controller.GetFilm(GameController.Player, showInterstitalAd);
-            //GameController.CurrentFilm = Sequoia.Controller.GetFilm(GameController.Player, null);
             GameController.TeleporterLocation = Sequoia.Controller.GetTeleporterLocation();
 
             var StoryAchievements = Sequoia.Controller.GetAchievements();
@@ -151,19 +151,17 @@ namespace Prominence.ViewModel
             MenuCmd = new Command(async () => {
                 await Application.Current.MainPage.Navigation.PushModalAsync(MenuView);
             });
-
-            Test();
+            
+            PlayMusic();
             var destinationFrame = GameController.Traverse(GameController.Player.Location);
             LoadFrame(destinationFrame);
         }
 
-        private async void Test()
+        private async void PlayMusic()
         {
-            //var mp = CrossMediaManager.Current;
-            //await mp.PlayFromAssembly("andrea_bg.mp3", AssemblyContext.Assembly);
-            //var andrea = Constants.Andrea;
-            var andrea = "Sequoia.Andrea";//"andrea_bg.mp3";
-            await CrossMediaManager.Current.Play(AssemblyContext.GetStreamByName(andrea), "andrea_bg.mp3");
+            new System.Threading.Thread(new System.Threading.ThreadStart(() => {
+                CrossMediaManager.Current.PlayFromAssembly("andrea_bg.mp3", AssemblyContext.Assembly);
+            })).Start();
         }
 
         public void ClearScreen(bool clearAll = false)

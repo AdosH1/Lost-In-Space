@@ -14,11 +14,8 @@ namespace Prominence.Contexts
 
         public static void Initialise(string projectName)
         {
-            Assembly = System.Reflection.Assembly.GetExecutingAssembly();
-            //var test = AppDomain.CurrentDomain.GetAssemblies();
             Assembly = AppDomain.CurrentDomain.GetAssemblies().Where(x => x.FullName.Contains(projectName)).First();
             string resourceName = Assembly.GetName().Name + ".Properties.Resources";
-            //string resourceName = Assembly.GetName().Name + ".Properties";
             
             ResourceManager = new System.Resources.ResourceManager(resourceName, Assembly);
         }

@@ -32,6 +32,18 @@ namespace Prominence.View
         protected override async void OnAppearing()
         {
             IsReady = true;
+            var count = GetIEnumerableCount(LogCollection.ItemsSource);
+            LogCollection.ScrollTo(count - 1, position: ScrollToPosition.End, animate: true);
+        }
+
+        private int GetIEnumerableCount(System.Collections.IEnumerable items)
+        {
+            var count = 0;
+            var it = items.GetEnumerator();
+
+            while (it.MoveNext())
+                count++;
+            return count;
         }
         
     }
