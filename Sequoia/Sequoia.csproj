@@ -89,6 +89,8 @@
     <EmbeddedResource Include="Properties\Resources.resx" />
     <EmbeddedResource Include="Properties\Resources.Designer.cs" />
     <EmbeddedResource Include="Resources\andrea_bg.mp3" />
+    <EmbeddedResource Include="Resources\sound_off.png" />
+    <EmbeddedResource Include="Resources\sound_on.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>
