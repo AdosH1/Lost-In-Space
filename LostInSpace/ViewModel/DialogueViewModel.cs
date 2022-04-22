@@ -159,9 +159,14 @@ namespace Prominence.ViewModel
 
         private async void PlayMusic()
         {
-            new System.Threading.Thread(new System.Threading.ThreadStart(() => {
-                CrossMediaManager.Current.PlayFromAssembly("andrea_bg.mp3", AssemblyContext.Assembly);
-            })).Start();
+            //new System.Threading.Thread(new System.Threading.ThreadStart(() => {
+            //    var music = AssemblyContext.Assembly.GetManifestResourceStream("Sequoia.Resources.andrea_bg.mp3");
+            //    CrossMediaManager.Current.Play(music, "andrea_bg.mp3");
+            //    //CrossMediaManager.Current.PlayFromAssembly("andrea_bg.mp3", AssemblyContext.Assembly);
+            //})).Start();
+            var music = AssemblyContext.Assembly.GetManifestResourceStream("Sequoia.Resources.andrea_bg.mp3");
+            await CrossMediaManager.Current.Play(music, "andrea_bg.mp3");
+            //await CrossMediaManager.Current.Play("https://ia600605.us.archive.org/32/items/Mp3Playlist_555/AaronNeville-CrazyLove.mp3");
         }
 
         public void ClearScreen(bool clearAll = false)

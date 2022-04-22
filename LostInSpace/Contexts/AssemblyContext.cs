@@ -44,5 +44,13 @@ namespace Prominence.Contexts
             return null;
         }
 
+        public static System.IO.Stream GetByManifest(string name)
+        {
+            using (Stream stream = Assembly.GetManifestResourceStream("LostInSpace.Sequoia."+name))
+            {
+                return stream;
+            }
+        }
+
     }
 }
