@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using MediaManager;
 using Prominence.Model.Constants;
 using UIKit;
 
@@ -27,6 +28,8 @@ namespace Prominence.iOS
             Google.MobileAds.MobileAds.Configure(AdConstants.InterstitialAppId);
             LoadApplication(new App());
             UIApplication.SharedApplication.StatusBarHidden = true;
+
+            CrossMediaManager.Current.Init();
 
             return base.FinishedLaunching(app, options);
         }

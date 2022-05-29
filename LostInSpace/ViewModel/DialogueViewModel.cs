@@ -18,6 +18,7 @@ using Sequoia;
 using Core.Models;
 using Xamarin.Essentials;
 using Prominence.Model.Interfaces;
+using MediaManager;
 
 namespace Prominence.ViewModel
 {
@@ -26,6 +27,7 @@ namespace Prominence.ViewModel
         public double Height { get; set; }
         public double Width { get; set; }
         public MenuView MenuView { get; set; }
+        public CollectionView LogCollection { get; set; }
         public ObservableCollection<DialogueLabel> Log { get; set; }
         public ObservableCollection<Button> Buttons { get; set; }
         private string CurrentBackgroundImage { get; set; }
@@ -134,7 +136,6 @@ namespace Prominence.ViewModel
 
             var showInterstitalAd = new Action(async () => { await DependencyService.Get<IInterstitialAd>().Display(AdConstants.DebugInterstitialId).ConfigureAwait(true); });
             GameController.CurrentFilm = Sequoia.Controller.GetFilm(GameController.Player, showInterstitalAd);
-            //GameController.CurrentFilm = Sequoia.Controller.GetFilm(GameController.Player, null);
             GameController.TeleporterLocation = Sequoia.Controller.GetTeleporterLocation();
 
             var StoryAchievements = Sequoia.Controller.GetAchievements();
@@ -150,9 +151,22 @@ namespace Prominence.ViewModel
             MenuCmd = new Command(async () => {
                 await Application.Current.MainPage.Navigation.PushModalAsync(MenuView);
             });
-
+            
+            PlayMusic();
             var destinationFrame = GameController.Traverse(GameController.Player.Location);
             LoadFrame(destinationFrame);
+        }
+
+        private async void PlayMusic()
+        {
+            //new System.Threading.Thread(new System.Threading.ThreadStart(() => {
+            //    var music = AssemblyContext.Assembly.GetManifestResourceStream("Sequoia.Resources.andrea_bg.mp3");
+            //    CrossMediaManager.Current.Play(music, "andrea_bg.mp3");
+            //    //CrossMediaManager.Current.PlayFromAssembly("andrea_bg.mp3", AssemblyContext.Assembly);
+            //})).Start();
+            var music = AssemblyContext.Assembly.GetManifestResourceStream("Sequoia.Resources.andrea_bg.mp3");
+            await CrossMediaManager.Current.Play(music, "andrea_bg.mp3");
+            //await CrossMediaManager.Current.Play("https://ia600605.us.archive.org/32/items/Mp3Playlist_555/AaronNeville-CrazyLove.mp3");
         }
 
         public void ClearScreen(bool clearAll = false)

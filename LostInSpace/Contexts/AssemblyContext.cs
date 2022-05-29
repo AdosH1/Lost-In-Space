@@ -14,11 +14,8 @@ namespace Prominence.Contexts
 
         public static void Initialise(string projectName)
         {
-            Assembly = System.Reflection.Assembly.GetExecutingAssembly();
-            //var test = AppDomain.CurrentDomain.GetAssemblies();
             Assembly = AppDomain.CurrentDomain.GetAssemblies().Where(x => x.FullName.Contains(projectName)).First();
             string resourceName = Assembly.GetName().Name + ".Properties.Resources";
-            //string resourceName = Assembly.GetName().Name + ".Properties";
             
             ResourceManager = new System.Resources.ResourceManager(resourceName, Assembly);
         }
@@ -35,6 +32,25 @@ namespace Prominence.Contexts
             return null;
         }
 
+        public static System.IO.Stream GetStreamByName(string fileName)
+        {
+            var obj = ResourceManager.GetObject(fileName);
+            if (obj != null)
+            {
+                var bytes = (byte[])obj;
+                MemoryStream stream = new MemoryStream(bytes);
+                return stream;
+            }
+            return null;
+        }
+
+        public static System.IO.Stream GetByManifest(string name)
+        {
+            using (Stream stream = Assembly.GetManifestResourceStream("LostInSpace.Sequoia."+name))
+            {
+                return stream;
+            }
+        }
 
     }
 }

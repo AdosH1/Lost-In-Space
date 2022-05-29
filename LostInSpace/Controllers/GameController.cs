@@ -6,6 +6,7 @@ using System.Text;
 using Prominence.ViewModel;
 using Prominence.Contexts;
 using Core.Controllers;
+using MediaManager;
 
 namespace Prominence.Controllers
 {

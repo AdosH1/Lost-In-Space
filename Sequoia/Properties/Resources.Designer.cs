@@ -299,5 +299,17 @@ namespace Sequoia.Properties {
                 return ((byte[])(obj));
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] Sequoia_Andrea
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("Sequoia.Andrea", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

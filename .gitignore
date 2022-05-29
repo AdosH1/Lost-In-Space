@@ -13,3 +13,5 @@ Utilities/obj/
 packages/
 .vs/*
 *.csproj.user
+.DS_Store
+

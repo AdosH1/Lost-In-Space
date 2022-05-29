@@ -29,6 +29,11 @@ namespace Sequoia
         public static readonly string Battery = "Sequoia.Battery";
         public static readonly string Gear = "Sequoia.Gear";
         public static readonly string Icon = "Sequoia.Icon";
+        public static readonly string SoundOn = "Sequoia.SoundOn";
+        public static readonly string SoundOff = "Sequoia.SoundOff";
+
+        // Music
+        public static readonly string Andrea = "Sequoia.Andrea";
 
         // Images
         public static readonly string Beach = "Sequoia.Beach";
