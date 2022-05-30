@@ -14,4 +14,4 @@ packages/
 .vs/*
 *.csproj.user
 .DS_Store
-
+LostInSpace.Android/Resources/Resource.designer.cs

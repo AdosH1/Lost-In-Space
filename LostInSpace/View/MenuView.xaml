@@ -14,12 +14,11 @@
         </ResourceDictionary>
     </ContentPage.Resources>
   <ContentPage.Content>
-<RelativeLayout>
+<RelativeLayout BackgroundColor="Black" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
     <Image Source="{Binding Background}"
-        RelativeLayout.WidthConstraint=
-        "{ConstraintExpression Type=RelativeToParent, Property=Width}"
-        RelativeLayout.HeightConstraint=
-        "{ConstraintExpression Type=RelativeToParent, Property=Height}"/>
+        RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}"
+        RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}"
+        Aspect="Fill"/>
     <Grid x:Name="ContextGrid" IsVisible="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
