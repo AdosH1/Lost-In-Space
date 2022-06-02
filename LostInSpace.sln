@@ -3,6 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{96B5BBAF-5C8F-4392-813B-BDEDBC42BF2F}"
+	ProjectSection(SolutionItems) = preProject
+		paket.dependencies = paket.dependencies
+	EndProjectSection
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LostInSpace.Android", "LostInSpace.Android\LostInSpace.Android.csproj", "{28B8E0DA-5C2F-447F-B0EC-2848B705FCC1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LostInSpace.iOS", "LostInSpace.iOS\LostInSpace.iOS.csproj", "{C6DBD55E-0B00-4B76-95D7-A9D47360AD16}"
