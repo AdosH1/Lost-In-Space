@@ -72,6 +72,17 @@ namespace Prominence.ViewModel
             }
         }
 
+        private ImageSource _soundStateIcon { get; set; }
+        public ImageSource SoundStateIcon
+        {
+            get => _soundStateIcon;
+            set
+            {
+                _soundStateIcon = value;
+                NotifyPropertyChanged("SoundStateIcon");
+            }
+        }
+
         private ImageSource _soundOnIcon { get; set; }
         public ImageSource SoundOnIcon
         {
@@ -175,7 +186,8 @@ namespace Prominence.ViewModel
             MenuCmd = new Command(async () => {
                 await Application.Current.MainPage.Navigation.PushModalAsync(MenuView);
             });
-            
+
+            SoundStateIcon = SoundOnIcon;
             PlayMusic();
             var destinationFrame = GameController.Traverse(GameController.Player.Location);
             LoadFrame(destinationFrame);

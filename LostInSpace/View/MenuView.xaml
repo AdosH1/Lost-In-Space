@@ -33,16 +33,21 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="55">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.2*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="4.5*"/>
+                <ColumnDefinition Width="4.5*"/>
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <ImageButton x:Name="MenuButton"
                     Grid.Column="0"
                     BackgroundColor="Transparent"
                     Source="{Binding MenuButtonImage}"
                     Command="{Binding CloseMenuCmd}"/>
+            <ImageButton x:Name="SoundButton"
+                            Grid.Column="1"
+                            BackgroundColor="Transparent"
+                            Source="{Binding SoundStateIcon}"/>
         </Grid>
             
         <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="55">
