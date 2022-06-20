@@ -50,7 +50,8 @@
                     <ImageButton x:Name="SoundButton"
                             Grid.Column="1"
                             BackgroundColor="Transparent"
-                            Source="{Binding SoundStateIcon}"/>
+                            Source="{Binding SoundStateIcon}"
+                            Command="{Binding ToggleAudioCmd}"/>
                     <Label Grid.Column="3" 
                            TextColor="White" 
                            FontSize="Medium"

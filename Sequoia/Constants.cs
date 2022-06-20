@@ -7,6 +7,7 @@ namespace Sequoia
     public static class Constants
     {
         public static readonly string AssemblyName = "Sequoia";
+        public static readonly string AudioName = "Sequoia.Resources.andrea_bg.mp3";
 
         // Flags
         public static readonly string Azul = "Sequoia.Azul";

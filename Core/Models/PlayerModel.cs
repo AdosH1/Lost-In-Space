@@ -32,15 +32,15 @@ namespace Core.Models
 
         public PlayerModel(PlayerSaveModel playerSaveModel)
         {
-            Name = playerSaveModel.Name;
-            Location = new LocationModel(playerSaveModel.Location);
             Energy = playerSaveModel.Energy;
-            MaxEnergy = playerSaveModel.MaxEnergy;
-            LastLogin = playerSaveModel.LastLogin;
-            Inventory = playerSaveModel.Inventory;
-            Visited = playerSaveModel.Visited;
-            Log = CreateDialogueLabelLog(playerSaveModel.Log);
             Flags = playerSaveModel.Flags;
+            Inventory = playerSaveModel.Inventory;
+            LastLogin = playerSaveModel.LastLogin;
+            Location = new LocationModel(playerSaveModel.Location);
+            Log = CreateDialogueLabelLog(playerSaveModel.Log);
+            MaxEnergy = playerSaveModel.MaxEnergy;
+            Name = playerSaveModel.Name;
+            Visited = playerSaveModel.Visited;
         }
 
         public ObservableCollection<DialogueLabel> CreateDialogueLabelLog(List<LabelSaveModel> theLog)
