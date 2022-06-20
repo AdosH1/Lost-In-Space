@@ -41,6 +41,39 @@ namespace Prominence.ViewModel
             }
         }
 
+        private ImageSource _soundStateIcon { get; set; }
+        public ImageSource SoundStateIcon
+        {
+            get => _soundStateIcon;
+            set
+            {
+                _soundStateIcon = value;
+                NotifyPropertyChanged("SoundStateIcon");
+            }
+        }
+
+        private ImageSource _soundOnIcon { get; set; }
+        public ImageSource SoundOnIcon
+        {
+            get => _soundOnIcon;
+            set
+            {
+                _soundOnIcon = value;
+                NotifyPropertyChanged("SoundOnIcon");
+            }
+        }
+
+        private ImageSource _soundOffIcon { get; set; }
+        public ImageSource SoundOffIcon
+        {
+            get => _soundOffIcon;
+            set
+            {
+                _soundOffIcon = value;
+                NotifyPropertyChanged("SoundOffIcon");
+            }
+        }
+
         private Command _teleporterCmd { get; set; }
         public Command TeleporterCmd
         {
@@ -67,6 +100,10 @@ namespace Prominence.ViewModel
         {
             GameController.MenuViewModel = this;
             MenuButtonImage = AssemblyContext.GetImageByName(Constants.Gear);
+            SoundOnIcon = AssemblyContext.GetImageByName(Constants.SoundOn);
+            SoundOffIcon = AssemblyContext.GetImageByName(Constants.SoundOff);
+            SoundStateIcon = SoundOnIcon;
+
             GameController.ChangeMenuBackground(Constants.MenuScreen);
             TeleporterCmd = new Command(async () =>
             {
