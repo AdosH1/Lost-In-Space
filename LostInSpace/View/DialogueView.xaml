@@ -37,8 +37,9 @@
                 <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="5*"/>
-                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="4.5*"/>
+                        <ColumnDefinition Width="4.5*"/>
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
                     <ImageButton x:Name="MenuButton"
@@ -46,11 +47,15 @@
                             BackgroundColor="Transparent"
                             Source="{Binding MenuButtonIcon}"
                             Command="{Binding MenuCmd}"/>
-                    <Label Grid.Column="2" 
+                    <ImageButton x:Name="SoundButton"
+                            Grid.Column="1"
+                            BackgroundColor="Transparent"
+                            Source="{Binding SoundOnIcon}"/>
+                    <Label Grid.Column="3" 
                            TextColor="White" 
                            FontSize="Medium"
                            HorizontalTextAlignment="End">Energy</Label>
-                    <Grid Grid.Row="0" Grid.Column="3" Padding="0,5,5,0">
+                    <Grid Grid.Row="0" Grid.Column="4" Padding="0,5,5,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>

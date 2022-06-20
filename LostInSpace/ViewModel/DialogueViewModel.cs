@@ -72,6 +72,28 @@ namespace Prominence.ViewModel
             }
         }
 
+        private ImageSource _soundOnIcon { get; set; }
+        public ImageSource SoundOnIcon
+        {
+            get => _soundOnIcon;
+            set
+            {
+                _soundOnIcon = value;
+                NotifyPropertyChanged("SoundOnIcon");
+            }
+        }
+
+        private ImageSource _soundOffIcon { get; set; }
+        public ImageSource SoundOffIcon
+        {
+            get => _soundOffIcon;
+            set
+            {
+                _soundOffIcon = value;
+                NotifyPropertyChanged("SoundOffIcon");
+            }
+        }
+
         private bool _showEnergyIcon1 { get; set; }
         public bool ShowEnergyIcon1
         {
@@ -147,6 +169,8 @@ namespace Prominence.ViewModel
 
             MenuView = new MenuView();
             MenuButtonIcon = AssemblyContext.GetImageByName(Constants.Gear);
+            SoundOnIcon = AssemblyContext.GetImageByName(Constants.SoundOn);
+            SoundOffIcon = AssemblyContext.GetImageByName(Constants.SoundOff);
             EnergyIcon = AssemblyContext.GetImageByName(Constants.Battery);
             MenuCmd = new Command(async () => {
                 await Application.Current.MainPage.Navigation.PushModalAsync(MenuView);
@@ -165,7 +189,7 @@ namespace Prominence.ViewModel
             //    //CrossMediaManager.Current.PlayFromAssembly("andrea_bg.mp3", AssemblyContext.Assembly);
             //})).Start();
             var music = AssemblyContext.Assembly.GetManifestResourceStream("Sequoia.Resources.andrea_bg.mp3");
-            await CrossMediaManager.Current.Play(music, "andrea_bg.mp3");
+            //await CrossMediaManager.Current.Play(music, "andrea_bg.mp3");
             //await CrossMediaManager.Current.Play("https://ia600605.us.archive.org/32/items/Mp3Playlist_555/AaronNeville-CrazyLove.mp3");
         }
 
