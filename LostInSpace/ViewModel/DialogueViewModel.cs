@@ -30,7 +30,6 @@ namespace Prominence.ViewModel
         public CollectionView LogCollection { get; set; }
         public ObservableCollection<DialogueLabel> Log { get; set; }
         public ObservableCollection<Button> Buttons { get; set; }
-        private System.IO.Stream Audio { get; set; }
 
         private string CurrentBackgroundImage { get; set; }
         private ImageSource _background { get; set; }
@@ -168,6 +167,7 @@ namespace Prominence.ViewModel
             Width = DeviceDisplay.MainDisplayInfo.Width;
             
             GameController.DialogueViewModel = this;
+            GameController.Audio = AssemblyContext.Assembly.GetManifestResourceStream(Constants.AudioName);
 
             var savedUser = SaveController.LoadUser();
             if (savedUser != null)
@@ -195,7 +195,7 @@ namespace Prominence.ViewModel
             SoundOnIcon = AssemblyContext.GetImageByName(Constants.SoundOn);
             SoundOffIcon = AssemblyContext.GetImageByName(Constants.SoundOff);
             EnergyIcon = AssemblyContext.GetImageByName(Constants.Battery);
-            Audio = AssemblyContext.Assembly.GetManifestResourceStream(Constants.AudioName);
+            
             MenuCmd = new Command(async () => {
                 await Application.Current.MainPage.Navigation.PushModalAsync(MenuView);
             });
@@ -213,10 +213,10 @@ namespace Prominence.ViewModel
 
         private async void StartAudio()
         {
-            await CrossMediaManager.Current.Play(Audio, "andrea_bg.mp3");
+            GameController.StartAudio();
             if (GameController.User.SettingsModel.MuteSound)
             {
-                await CrossMediaManager.Current.Pause();
+                GameController.PauseAudio();
                 SoundStateIcon = SoundOffIcon;
             }
             else
@@ -230,12 +230,12 @@ namespace Prominence.ViewModel
             if (!muted)
             {
                 SoundStateIcon = SoundOnIcon;
-                await CrossMediaManager.Current.Play();
+                GameController.PlayAudio();
             }
             else
             {
                 SoundStateIcon = SoundOffIcon;
-                await CrossMediaManager.Current.Pause();
+                GameController.PauseAudio();
             }
         }
 

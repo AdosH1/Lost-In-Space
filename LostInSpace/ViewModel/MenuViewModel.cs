@@ -74,6 +74,17 @@ namespace Prominence.ViewModel
             }
         }
 
+        private Command _toggleAudioCmd { get; set; }
+        public Command ToggleAudioCmd
+        {
+            get => _toggleAudioCmd;
+            set
+            {
+                _toggleAudioCmd = value;
+                NotifyPropertyChanged("ToggleAudioCmd");
+            }
+        }
+
         private Command _teleporterCmd { get; set; }
         public Command TeleporterCmd
         {
@@ -102,9 +113,14 @@ namespace Prominence.ViewModel
             MenuButtonImage = AssemblyContext.GetImageByName(Constants.Gear);
             SoundOnIcon = AssemblyContext.GetImageByName(Constants.SoundOn);
             SoundOffIcon = AssemblyContext.GetImageByName(Constants.SoundOff);
-            SoundStateIcon = SoundOnIcon;
+            SoundStateIcon = GameController.User.SettingsModel.MuteSound ? SoundOffIcon : SoundOnIcon;
 
             GameController.ChangeMenuBackground(Constants.MenuScreen);
+            ToggleAudioCmd = new Command(async () =>
+            {
+                GameController.User.SettingsModel.MuteSound = !GameController.User.SettingsModel.MuteSound;
+                HandleAudio(GameController.User.SettingsModel.MuteSound);
+            });
             TeleporterCmd = new Command(async () =>
             {
                 GameController.DialogueViewModel.Log.Clear();
@@ -132,6 +148,20 @@ namespace Prominence.ViewModel
         public void ChangeBackground(ImageSource source)
         {
             Background = source;
+        }
+
+        private async void HandleAudio(bool muted)
+        {
+            if (!muted)
+            {
+                SoundStateIcon = SoundOnIcon;
+                GameController.PlayAudio();
+            }
+            else
+            {
+                SoundStateIcon = SoundOffIcon;
+                GameController.PauseAudio();
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -20,6 +20,7 @@ namespace Prominence.Controllers
         public static PlayerModel Player { get => User.PlayerModel; }
         public static DialogueViewModel DialogueViewModel;
         public static MenuViewModel MenuViewModel;
+        public static System.IO.Stream Audio { get; set; }
 
         public static LocationModel TeleporterLocation;
 
@@ -205,6 +206,25 @@ namespace Prominence.Controllers
                 }
             }
             return storyAchievements;
+        }
+
+        public static async void StartAudio()
+        {
+            await CrossMediaManager.Current.Play(Audio, "andrea_bg.mp3");
+            if (GameController.User.SettingsModel.MuteSound)
+            {
+                await CrossMediaManager.Current.Pause();
+            }
+        }
+
+        public static async void PlayAudio()
+        {
+            await CrossMediaManager.Current.Play();
+        }
+
+        public static async void PauseAudio()
+        {
+            await CrossMediaManager.Current.Pause();
         }
 
     }
