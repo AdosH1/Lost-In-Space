@@ -41,37 +41,9 @@ namespace Prominence.ViewModel
             }
         }
 
-        private ImageSource _soundStateIcon { get; set; }
         public ImageSource SoundStateIcon
         {
-            get => _soundStateIcon;
-            set
-            {
-                _soundStateIcon = value;
-                NotifyPropertyChanged("SoundStateIcon");
-            }
-        }
-
-        private ImageSource _soundOnIcon { get; set; }
-        public ImageSource SoundOnIcon
-        {
-            get => _soundOnIcon;
-            set
-            {
-                _soundOnIcon = value;
-                NotifyPropertyChanged("SoundOnIcon");
-            }
-        }
-
-        private ImageSource _soundOffIcon { get; set; }
-        public ImageSource SoundOffIcon
-        {
-            get => _soundOffIcon;
-            set
-            {
-                _soundOffIcon = value;
-                NotifyPropertyChanged("SoundOffIcon");
-            }
+            get => GameController.SoundStateIcon;
         }
 
         private Command _toggleAudioCmd { get; set; }
@@ -111,15 +83,16 @@ namespace Prominence.ViewModel
         {
             GameController.MenuViewModel = this;
             MenuButtonImage = AssemblyContext.GetImageByName(Constants.Gear);
-            SoundOnIcon = AssemblyContext.GetImageByName(Constants.SoundOn);
-            SoundOffIcon = AssemblyContext.GetImageByName(Constants.SoundOff);
-            SoundStateIcon = GameController.User.SettingsModel.MuteSound ? SoundOffIcon : SoundOnIcon;
+            GameController.SoundOnIcon = AssemblyContext.GetImageByName(Constants.SoundOn);
+            GameController.SoundOffIcon = AssemblyContext.GetImageByName(Constants.SoundOff);
+            //SoundStateIcon = GameController.User.SettingsModel.MuteSound ? SoundOffIcon : SoundOnIcon;
 
             GameController.ChangeMenuBackground(Constants.MenuScreen);
             ToggleAudioCmd = new Command(async () =>
             {
                 GameController.User.SettingsModel.MuteSound = !GameController.User.SettingsModel.MuteSound;
                 HandleAudio(GameController.User.SettingsModel.MuteSound);
+                NotifyPropertyChanged("SoundStateIcon");
             });
             TeleporterCmd = new Command(async () =>
             {
@@ -154,12 +127,12 @@ namespace Prominence.ViewModel
         {
             if (!muted)
             {
-                SoundStateIcon = SoundOnIcon;
+                //SoundStateIcon = SoundOnIcon;
                 GameController.PlayAudio();
             }
             else
             {
-                SoundStateIcon = SoundOffIcon;
+                //SoundStateIcon = SoundOffIcon;
                 GameController.PauseAudio();
             }
         }

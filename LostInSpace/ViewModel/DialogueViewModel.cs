@@ -73,38 +73,11 @@ namespace Prominence.ViewModel
             }
         }
 
-        private ImageSource _soundStateIcon { get; set; }
         public ImageSource SoundStateIcon
         {
-            get => _soundStateIcon;
-            set
-            {
-                _soundStateIcon = value;
-                NotifyPropertyChanged("SoundStateIcon");
-            }
+            get => GameController.SoundStateIcon;
         }
 
-        private ImageSource _soundOnIcon { get; set; }
-        public ImageSource SoundOnIcon
-        {
-            get => _soundOnIcon;
-            set
-            {
-                _soundOnIcon = value;
-                NotifyPropertyChanged("SoundOnIcon");
-            }
-        }
-
-        private ImageSource _soundOffIcon { get; set; }
-        public ImageSource SoundOffIcon
-        {
-            get => _soundOffIcon;
-            set
-            {
-                _soundOffIcon = value;
-                NotifyPropertyChanged("SoundOffIcon");
-            }
-        }
         private Command _toggleAudioCmd { get; set; }
         public Command ToggleAudioCmd
         {
@@ -192,8 +165,8 @@ namespace Prominence.ViewModel
 
             MenuView = new MenuView();
             MenuButtonIcon = AssemblyContext.GetImageByName(Constants.Gear);
-            SoundOnIcon = AssemblyContext.GetImageByName(Constants.SoundOn);
-            SoundOffIcon = AssemblyContext.GetImageByName(Constants.SoundOff);
+            GameController.SoundOnIcon = AssemblyContext.GetImageByName(Constants.SoundOn);
+            GameController.SoundOffIcon = AssemblyContext.GetImageByName(Constants.SoundOff);
             EnergyIcon = AssemblyContext.GetImageByName(Constants.Battery);
             
             MenuCmd = new Command(async () => {
@@ -204,6 +177,7 @@ namespace Prominence.ViewModel
             {
                 GameController.User.SettingsModel.MuteSound = !GameController.User.SettingsModel.MuteSound;
                 HandleAudio(GameController.User.SettingsModel.MuteSound);
+                NotifyPropertyChanged("SoundStateIcon");
             });
             StartAudio();
 
@@ -217,11 +191,11 @@ namespace Prominence.ViewModel
             if (GameController.User.SettingsModel.MuteSound)
             {
                 GameController.PauseAudio();
-                SoundStateIcon = SoundOffIcon;
+                //SoundStateIcon = SoundOffIcon;
             }
             else
             {
-                SoundStateIcon = SoundOnIcon;
+                //SoundStateIcon = SoundOnIcon;
             }
         }
 
@@ -229,12 +203,12 @@ namespace Prominence.ViewModel
         {
             if (!muted)
             {
-                SoundStateIcon = SoundOnIcon;
+                //SoundStateIcon = SoundOnIcon;
                 GameController.PlayAudio();
             }
             else
             {
-                SoundStateIcon = SoundOffIcon;
+                //SoundStateIcon = SoundOffIcon;
                 GameController.PauseAudio();
             }
         }

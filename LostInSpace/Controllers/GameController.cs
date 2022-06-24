@@ -7,6 +7,7 @@ using Prominence.ViewModel;
 using Prominence.Contexts;
 using Core.Controllers;
 using MediaManager;
+using Xamarin.Forms;
 
 namespace Prominence.Controllers
 {
@@ -21,6 +22,33 @@ namespace Prominence.Controllers
         public static DialogueViewModel DialogueViewModel;
         public static MenuViewModel MenuViewModel;
         public static System.IO.Stream Audio { get; set; }
+
+        private static ImageSource _soundOnIcon { get; set; }
+        public static ImageSource SoundOnIcon
+        {
+            get => _soundOnIcon;
+            set
+            {
+                _soundOnIcon = value;
+            }
+        }
+
+        private static ImageSource _soundOffIcon { get; set; }
+        public static ImageSource SoundOffIcon
+        {
+            get => _soundOffIcon;
+            set
+            {
+                _soundOffIcon = value;
+            }
+        }
+        public static ImageSource SoundStateIcon
+        {
+            get
+            {
+                return User.SettingsModel.MuteSound ? SoundOffIcon : SoundOnIcon;
+            }
+        }
 
         public static LocationModel TeleporterLocation;
 
