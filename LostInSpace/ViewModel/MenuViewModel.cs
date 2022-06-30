@@ -44,6 +44,7 @@ namespace Prominence.ViewModel
         public ImageSource SoundStateIcon
         {
             get => GameController.SoundStateIcon;
+            set => NotifyPropertyChanged("SoundStateIcon");
         }
 
         private Command _toggleAudioCmd { get; set; }

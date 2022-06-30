@@ -20,11 +20,14 @@ namespace Prominence.View
     public partial class DialogueView : ContentPage
     {
         public bool IsReady = false;
+        public DialogueViewModel ViewModel { get; set; }
 
         public DialogueView()
         {
             InitializeComponent();
 
+            ViewModel = new DialogueViewModel();
+            BindingContext = ViewModel;
             DialogueViewModel.AchievementTab = AchievementTab;
             AchievementTab.TranslateTo(0, -100);
         }
@@ -34,6 +37,8 @@ namespace Prominence.View
             IsReady = true;
             var count = GetIEnumerableCount(LogCollection.ItemsSource);
             LogCollection.ScrollTo(count - 1, position: ScrollToPosition.End, animate: true);
+
+            ViewModel.SoundStateIcon = "Update";
         }
 
         private int GetIEnumerableCount(System.Collections.IEnumerable items)
