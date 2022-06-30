@@ -1,13 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:local="clr-namespace:Prominence.ViewModel"
              xmlns:converter="clr-namespace:Prominence.Converters"
              x:Class="Prominence.View.MenuView"
              >
-    <ContentPage.BindingContext>
-        <local:MenuViewModel/>
-    </ContentPage.BindingContext>
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:AchievementToStringConverter  x:Key="AchievementToStringConverter" />
@@ -47,7 +43,8 @@
             <ImageButton x:Name="SoundButton"
                             Grid.Column="1"
                             BackgroundColor="Transparent"
-                            Source="{Binding SoundStateIcon}"/>
+                            Source="{Binding SoundStateIcon}"
+                            Command="{Binding ToggleAudioCmd}"/>
         </Grid>
             
         <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="55">

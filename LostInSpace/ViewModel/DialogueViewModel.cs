@@ -30,6 +30,7 @@ namespace Prominence.ViewModel
         public CollectionView LogCollection { get; set; }
         public ObservableCollection<DialogueLabel> Log { get; set; }
         public ObservableCollection<Button> Buttons { get; set; }
+
         private string CurrentBackgroundImage { get; set; }
         private ImageSource _background { get; set; }
         public ImageSource Background 
@@ -72,36 +73,20 @@ namespace Prominence.ViewModel
             }
         }
 
-        private ImageSource _soundStateIcon { get; set; }
         public ImageSource SoundStateIcon
         {
-            get => _soundStateIcon;
-            set
-            {
-                _soundStateIcon = value;
-                NotifyPropertyChanged("SoundStateIcon");
-            }
+            get => GameController.SoundStateIcon;
+            set => NotifyPropertyChanged("SoundStateIcon");
         }
 
-        private ImageSource _soundOnIcon { get; set; }
-        public ImageSource SoundOnIcon
+        private Command _toggleAudioCmd { get; set; }
+        public Command ToggleAudioCmd
         {
-            get => _soundOnIcon;
+            get => _toggleAudioCmd;
             set
             {
-                _soundOnIcon = value;
-                NotifyPropertyChanged("SoundOnIcon");
-            }
-        }
-
-        private ImageSource _soundOffIcon { get; set; }
-        public ImageSource SoundOffIcon
-        {
-            get => _soundOffIcon;
-            set
-            {
-                _soundOffIcon = value;
-                NotifyPropertyChanged("SoundOffIcon");
+                _toggleAudioCmd = value;
+                NotifyPropertyChanged("ToggleAudioCmd");
             }
         }
 
@@ -156,6 +141,7 @@ namespace Prominence.ViewModel
             Width = DeviceDisplay.MainDisplayInfo.Width;
             
             GameController.DialogueViewModel = this;
+            GameController.Audio = AssemblyContext.Assembly.GetManifestResourceStream(Constants.AudioName);
 
             var savedUser = SaveController.LoadUser();
             if (savedUser != null)
@@ -180,29 +166,52 @@ namespace Prominence.ViewModel
 
             MenuView = new MenuView();
             MenuButtonIcon = AssemblyContext.GetImageByName(Constants.Gear);
-            SoundOnIcon = AssemblyContext.GetImageByName(Constants.SoundOn);
-            SoundOffIcon = AssemblyContext.GetImageByName(Constants.SoundOff);
+            GameController.SoundOnIcon = AssemblyContext.GetImageByName(Constants.SoundOn);
+            GameController.SoundOffIcon = AssemblyContext.GetImageByName(Constants.SoundOff);
             EnergyIcon = AssemblyContext.GetImageByName(Constants.Battery);
+            
             MenuCmd = new Command(async () => {
                 await Application.Current.MainPage.Navigation.PushModalAsync(MenuView);
             });
 
-            SoundStateIcon = SoundOnIcon;
-            PlayMusic();
+            ToggleAudioCmd = new Command(async () =>
+            {
+                GameController.User.SettingsModel.MuteSound = !GameController.User.SettingsModel.MuteSound;
+                HandleAudio(GameController.User.SettingsModel.MuteSound);
+                NotifyPropertyChanged("SoundStateIcon");
+            });
+            StartAudio();
+
             var destinationFrame = GameController.Traverse(GameController.Player.Location);
             LoadFrame(destinationFrame);
         }
 
-        private async void PlayMusic()
+        private async void StartAudio()
         {
-            //new System.Threading.Thread(new System.Threading.ThreadStart(() => {
-            //    var music = AssemblyContext.Assembly.GetManifestResourceStream("Sequoia.Resources.andrea_bg.mp3");
-            //    CrossMediaManager.Current.Play(music, "andrea_bg.mp3");
-            //    //CrossMediaManager.Current.PlayFromAssembly("andrea_bg.mp3", AssemblyContext.Assembly);
-            //})).Start();
-            var music = AssemblyContext.Assembly.GetManifestResourceStream("Sequoia.Resources.andrea_bg.mp3");
-            //await CrossMediaManager.Current.Play(music, "andrea_bg.mp3");
-            //await CrossMediaManager.Current.Play("https://ia600605.us.archive.org/32/items/Mp3Playlist_555/AaronNeville-CrazyLove.mp3");
+            GameController.StartAudio();
+            if (GameController.User.SettingsModel.MuteSound)
+            {
+                GameController.PauseAudio();
+                //SoundStateIcon = SoundOffIcon;
+            }
+            else
+            {
+                //SoundStateIcon = SoundOnIcon;
+            }
+        }
+
+        private async void HandleAudio(bool muted)
+        {
+            if (!muted)
+            {
+                //SoundStateIcon = SoundOnIcon;
+                GameController.PlayAudio();
+            }
+            else
+            {
+                //SoundStateIcon = SoundOffIcon;
+                GameController.PauseAudio();
+            }
         }
 
         public void ClearScreen(bool clearAll = false)
