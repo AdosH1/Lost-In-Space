@@ -27,7 +27,7 @@ namespace Prominence.ViewModel
         public double Height { get; set; }
         public double Width { get; set; }
         public MenuView MenuView { get; set; }
-        public CollectionView LogCollection { get; set; }
+        public ListView LogCollection { get; set; }
         public ObservableCollection<DialogueLabel> Log { get; set; }
         public ObservableCollection<Button> Buttons { get; set; }
 

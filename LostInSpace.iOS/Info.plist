@@ -35,7 +35,7 @@
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>GADApplicationIdentifier</key>
-    <string>ca-app-pub-3397582154167604~2178089825</string>
+	<string>ca-app-pub-3397582154167604~2178089825</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
