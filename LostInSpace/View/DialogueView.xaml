@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:custom="clr-namespace:View.Controls.CustomViews"
              mc:Ignorable="d"
              x:Class="Prominence.View.DialogueView"
              >
@@ -63,28 +64,30 @@
                         <Image Grid.Column="2" IsVisible="{Binding ShowEnergyIcon1}" Source="{Binding EnergyIcon}"/>
                     </Grid>
                 </Grid>
-                <CollectionView Grid.Row="1" Grid.Column="1" 
+                <custom:AutoScrollListView Grid.Row="1" Grid.Column="1" 
                         x:Name="LogCollection"
                         ItemsSource="{Binding Log}" 
                         BackgroundColor="Transparent" 
-                        VerticalOptions="End" 
+                        VerticalOptions="FillAndExpand"
                         VerticalScrollBarVisibility="Always"
-                        ItemsUpdatingScrollMode="KeepLastItemInView">
-                    <CollectionView.ItemTemplate>
+                        HasUnevenRows="True">
+                    <custom:AutoScrollListView.ItemTemplate>
                         <DataTemplate>
-                            <StackLayout>
-                                <Label
-                                    Margin="5"
-                                    Text="{Binding Text}" 
-                                    FontSize="Medium" 
-                                    HorizontalTextAlignment="{Binding HorizontalTextAlignment}" 
-                                    TextColor="{Binding TextColor}" 
-                                    BackgroundColor="Transparent"
-                                    />
-                            </StackLayout>
+                            <ViewCell>
+                                <StackLayout>
+                                    <Label
+                                        Margin="5"
+                                        Text="{Binding Text}"
+                                        FontSize="Medium" 
+                                        HorizontalTextAlignment="{Binding HorizontalTextAlignment}" 
+                                        TextColor="{Binding TextColor}" 
+                                        BackgroundColor="Transparent"
+                                        />
+                                </StackLayout>
+                            </ViewCell>
                         </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                    </custom:AutoScrollListView.ItemTemplate>
+                </custom:AutoScrollListView>
                 <CollectionView Grid.Row="3" Grid.Column="1" VerticalOptions="FillAndExpand"
                         ItemsSource="{Binding Buttons}">
                     <CollectionView.ItemTemplate>

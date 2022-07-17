@@ -36,7 +36,7 @@ namespace Prominence.View
         {
             IsReady = true;
             var count = GetIEnumerableCount(LogCollection.ItemsSource);
-            LogCollection.ScrollTo(count - 1, position: ScrollToPosition.End, animate: true);
+            LogCollection.ScrollTo(count - 1, position: ScrollToPosition.End, true);
 
             ViewModel.SoundStateIcon = "Update";
         }
